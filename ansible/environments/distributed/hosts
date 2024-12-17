@@ -8,30 +8,18 @@ ansible ansible_connection=local
 
 [controllers]
 controller0         ansible_host=10.3.92.112 ansible_connection=local
-;{% if mode is defined and 'HA' in mode %}
-;controller1         ansible_host=172.17.0.1 ansible_connection=local
-;{% endif %}
-
+;
 [kafkas]
 kafka0              ansible_host=10.3.92.112 ansible_connection=local
-{% if mode is defined and 'HA' in mode %}
-kafka1              ansible_host=10.3.92.112 ansible_connection=local
-{% endif %}
 
 [zookeepers:children]
 kafkas
 
 [invokers]
 invoker0            ansible_host=10.3.92.112 ansible_connection=local
-{% if mode is defined and 'HA' in mode %}
-invoker1            ansible_host=10.3.92.112 ansible_connection=local
-{% endif %}
 
 [schedulers]
 scheduler0       ansible_host=10.3.92.112 ansible_connection=local
-{% if mode is defined and 'HA' in mode %}
-scheduler1       ansible_host=10.3.92.112 ansible_connection=local
-{% endif %}
 
 ; db group is only used if db.provider is CouchDB
 [db]
@@ -48,3 +36,10 @@ db
 
 [etcd]
 etcd0            ansible_host=10.3.92.112 ansible_connection=local
+
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=exouser
+ansible_ssh_pass=DEER SAYS FATE MODE MANN FEST CORK MAYO TUG SHAW SILT
+ansible_python_interpreter=/usr/bin/python3
